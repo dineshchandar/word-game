@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  .word-container {
+    margin-top: 50px;
+  }
+  
+  h1 {
+    font-size: 4em;
+  }
+  
+  #word-display {
+    color: black;
+  }
+  
+  .button-container {
+    margin-top: 20px;
+  }
+  
+  button {
+    font-size: 1em;
+    padding: 10px 20px;
+    margin: 0 10px;
+  }
+  

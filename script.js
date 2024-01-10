@@ -9,7 +9,8 @@ const words = [
   const wordDisplay = document.getElementById('word-display');
   const prevButton = document.getElementById('prev-btn');
   const nextButton = document.getElementById('next-btn');
-  const pronounceButton = document.getElementById('pronounce-btn');
+  const speakButton = document.getElementById('speak-btn');
+  const synth = window.speechSynthesis;
   
   function displayWord() {
     const word = words[currentIndex];
@@ -18,10 +19,19 @@ const words = [
     wordDisplay.innerHTML = `<span style="color: red">${displayWord}</span>${remainder}`;
   }
   
+  function pronounceLetters() {
+    const word = words[currentIndex];
+    const letters = word.split('');
+    letters.forEach(letter => {
+      const utterance = new SpeechSynthesisUtterance(letter);
+      synth.speak(utterance);
+    });
+  }
+  
   function pronounceWord() {
     const word = words[currentIndex];
-    const speech = new SpeechSynthesisUtterance(word);
-    window.speechSynthesis.speak(speech);
+    const utterance = new SpeechSynthesisUtterance(word);
+    synth.speak(utterance);
   }
   
   prevButton.addEventListener('click', () => {
@@ -34,8 +44,9 @@ const words = [
     displayWord();
   });
   
-  pronounceButton.addEventListener('click', () => {
-    pronounceWord();
+  speakButton.addEventListener('click', () => {
+    pronounceLetters();
+    setTimeout(pronounceWord, words[currentIndex].length * 400); // Delay for pronunciation after letters
   });
   
   // Initial display

@@ -9,12 +9,19 @@ const words = [
   const wordDisplay = document.getElementById('word-display');
   const prevButton = document.getElementById('prev-btn');
   const nextButton = document.getElementById('next-btn');
+  const pronounceButton = document.getElementById('pronounce-btn');
   
   function displayWord() {
     const word = words[currentIndex];
     const displayWord = word.slice(0, 2); // First two letters
     const remainder = word.slice(2); // Remaining part of the word
     wordDisplay.innerHTML = `<span style="color: red">${displayWord}</span>${remainder}`;
+  }
+  
+  function pronounceWord() {
+    const word = words[currentIndex];
+    const speech = new SpeechSynthesisUtterance(word);
+    window.speechSynthesis.speak(speech);
   }
   
   prevButton.addEventListener('click', () => {
@@ -25,6 +32,10 @@ const words = [
   nextButton.addEventListener('click', () => {
     currentIndex = (currentIndex + 1) % words.length;
     displayWord();
+  });
+  
+  pronounceButton.addEventListener('click', () => {
+    pronounceWord();
   });
   
   // Initial display
